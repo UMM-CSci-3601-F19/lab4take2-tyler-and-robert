@@ -1,6 +1,11 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AddTodoComponent } from './add-todo.component';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+
+import {AddTodoComponent} from './add-todo.component';
+import {CustomModule} from '../custom.module';
+import {By} from "@angular/platform-browser";
+import {NgForm} from "@angular/forms";
 
 describe('AddTodoComponent', () => {
   let component: AddTodoComponent;

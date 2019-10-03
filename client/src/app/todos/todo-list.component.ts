@@ -20,7 +20,7 @@ export class TodoListComponent implements OnInit {
   // We should rename them to make that clearer.
   public todoOwner: string;
   public todoStatus: boolean;
-  public todoBody: string;
+  public todoCategory: string;
 
   // The ID of the
   private highlightedID: string = '';
@@ -58,12 +58,12 @@ export class TodoListComponent implements OnInit {
     });
   }
 
-  public updateName(newOwner: string): void {
+  public updateOwner(newOwner: string): void {
     this.todoOwner = newOwner;
     this.updateFilter();
   }
 
-  public updateAge(newStatus: boolean): void {
+  public updateStatus(newStatus: boolean): void {
     this.todoStatus = newStatus;
     this.updateFilter();
   }
@@ -101,7 +101,7 @@ export class TodoListComponent implements OnInit {
   }
 
   loadService(): void {
-    this.todoListService.getTodos(this.todoBody).subscribe(
+    this.todoListService.getTodos(this.todoCategory).subscribe(
       todos => {
         this.todos = todos;
         this.filteredTodos = this.todos;

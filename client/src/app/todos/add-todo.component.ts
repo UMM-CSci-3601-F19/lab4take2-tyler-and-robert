@@ -31,8 +31,9 @@ export class AddTodoComponent implements OnInit {
       {type: 'required', message: 'Status is required'}
     ],
 
-    'category': [
-      {type: 'category', message: 'Category must be formatted properly'}
+    'body': [
+      {type: 'maxlength', message: 'Body cannot be more than 50 characters long.'},
+      {type: 'minlength', message: 'Body must be 4 or more characters.'}
     ]
   };
 

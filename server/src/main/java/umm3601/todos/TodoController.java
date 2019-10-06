@@ -68,8 +68,8 @@ public class TodoController {
     Document filterDoc = new Document();
 
     if (queryParams.containsKey("status")) {
-      int targetAge = Integer.parseInt(queryParams.get("status")[0]);
-      filterDoc = filterDoc.append("status", targetAge);
+      boolean targetStatus = Boolean.parseBoolean(queryParams.get("status")[0]);
+      filterDoc = filterDoc.append("status", targetStatus);
     }
 
     if (queryParams.containsKey("category")) {
@@ -107,7 +107,7 @@ public class TodoController {
    * @param body the email of the new todo
    * @return boolean after successfully or unsuccessfully adding a todo
    */
-  public String addNewTodo(String owner, int status, String category, String body) {
+  public String addNewTodo(String owner, boolean status, String category, String body) {
 
     Document newTodo = new Document();
     newTodo.append("owner", owner);

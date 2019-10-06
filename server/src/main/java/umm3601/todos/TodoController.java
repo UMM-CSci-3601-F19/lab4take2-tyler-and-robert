@@ -101,10 +101,10 @@ public class TodoController {
   /**
    * Helper method which appends received todo information to the to-be added document
    *
-   * @param owner the name of the new todo
-   * @param status the age of the new todo
-   * @param category the company the new todo works for
-   * @param body the email of the new todo
+   * @param owner the owner of the new todo
+   * @param status the status of the new todo
+   * @param category the category the new todo works for
+   * @param body the body of the new todo
    * @return boolean after successfully or unsuccessfully adding a todo
    */
   public String addNewTodo(String owner, boolean status, String category, String body) {

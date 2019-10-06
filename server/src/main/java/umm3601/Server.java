@@ -14,7 +14,7 @@ import static spark.debug.DebugScreen.enableDebugScreen;
 
 public class Server {
   private static final String userDatabaseName = "dev";
-  private static final String todoDatabaseName = "ved";
+  private static final String todoDatabaseName = "devTodo";
   private static final int serverPort = 4567;
 
   public static void main(String[] args) {
@@ -71,7 +71,7 @@ public class Server {
     post("api/users/new", userRequestHandler::addNewUser);
     get("api/todos", todoRequestHandler::getTodos);
     get("api/todos/:id", todoRequestHandler::getTodoJSON);
-    post("api/users/new", todoRequestHandler::addNewTodo);
+    post("api/todos/new", todoRequestHandler::addNewTodo);
 
     // An example of throwing an unhandled exception so you can see how the
     // Java Spark debugger displays errors like this.

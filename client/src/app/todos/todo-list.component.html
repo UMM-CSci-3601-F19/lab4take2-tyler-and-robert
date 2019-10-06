@@ -21,17 +21,25 @@
           <input
             matInput
             id="todoStatus" #input
-            type="number"
+            type="boolean"
             placeholder="Filter by status"
             (input)="updateStatus($event.target.value)">
         </mat-form-field>
         <mat-form-field>
-          <input matInput id="todoCategory" #input type="search" placeholder="Search for category"
-                 [(ngModel)]="todoCategory"/>
-          <button mat-button id="categoryClearSearch" type="button" *ngIf="todoCategory" matSuffix mat-icon-button
-                  aria-label="clear" (click)="todoCategory='';loadService()">
-            <mat-icon>close</mat-icon>
-          </button>
+          <input
+            matInput
+            id="todoCategory" #input
+            type="text"
+            placeholder="Filter by category"
+            (input)="updateCategory($event.target.value)">
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            id="todoBody" #input
+            type="text"
+            placeholder="Filter by something in the body"
+            (input)="updateBody($event.target.value)">
         </mat-form-field>
         <button mat-raised-button id="submit" color="primary" #input type="button" (click)="loadService()">Submit
         </button>
@@ -43,8 +51,9 @@
               <mat-panel-title matTooltip="body: {{todo.body}}">{{todo.owner}}</mat-panel-title>
 
             </mat-expansion-panel-header>
-            <mat-panel-description>Works for {{todo.category}}</mat-panel-description>
-            <mat-panel-description>Status: {{todo.status}} years old</mat-panel-description>
+            <mat-panel-description>Category: {{todo.category}}</mat-panel-description>
+            <mat-panel-description>Status: {{todo.status}}</mat-panel-description>
+            <mat-panel-description>Body: {{todo.body}}</mat-panel-description>
           </mat-expansion-panel>
         </mat-accordion>
         <!-- Maybe this should be a pop-up instead of just a text messstatus? Not sure. -->

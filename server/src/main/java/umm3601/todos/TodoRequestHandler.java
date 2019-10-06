@@ -77,12 +77,12 @@ public class TodoRequestHandler {
 
     Document newTodo = Document.parse(req.body());
 
-    String name = newTodo.getString("name");
-    int age = newTodo.getInteger("age");
-    String company = newTodo.getString("company");
-    String email = newTodo.getString("email");
+    String owner = newTodo.getString("owner");
+    boolean status = newTodo.getBoolean("status");
+    String category = newTodo.getString("category");
+    String body = newTodo.getString("body");
 
-    System.err.println("Adding new todo [name=" + name + ", age=" + age + " company=" + company + " email=" + email + ']');
-    return todoController.addNewTodo(name, age, company, email);
+    System.err.println("Adding new todo [owner=" + owner + ", status=" + status + " category=" + category + " body=" + body + ']');
+    return todoController.addNewTodo(owner, status, category, body);
   }
 }

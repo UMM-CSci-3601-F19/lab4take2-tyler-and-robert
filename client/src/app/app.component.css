@@ -1,0 +1,15 @@
+div{
+  background: linear-gradient(110deg, #6CD8AC 40%, #24C5C5 60%);
+  padding-bottom: 100px;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+.navbar{
+  font-family: 'Ropa Sans', sans-serif;
+  font-size: large;
+
+}
+.title{
+  font-family: 'Press Start 2P', cursive;
+
+}

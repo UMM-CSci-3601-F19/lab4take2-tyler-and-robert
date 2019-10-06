@@ -8,6 +8,6 @@ export class HomeComponent {
   public text: string;
 
   constructor() {
-    this.text = "This is a home page! It doesn't do anything!";
+    this.text = "  This is a home page! It doesn't do anything!  ";
   }
 }

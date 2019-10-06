@@ -20,20 +20,20 @@ export class AddTodoComponent implements OnInit {
   // but this is where the red text that shows up (when there is invalid input) comes from
   add_todo_validation_messages = {
     'owner': [
-      {type: 'required', message: 'Owner  is required'},
-      {type: 'minlength', message: 'Owner must be at least 2 characters long'},
-      {type: 'maxlength', message: 'Owner cannot be more than 25 characters long'},
-      {type: 'pattern', message: 'Owner must contain only numbers and letters'},
+      {type: 'required', message: 'Owner  is required!'},
+      {type: 'minlength', message: 'Owner must be at least 2 characters long!'},
+      {type: 'maxlength', message: 'Owner cannot be more than 25 characters long!'},
+      {type: 'pattern', message: 'Owner must contain only numbers and letters!'},
     ],
 
     'status': [
-      {type: 'pattern', message: 'Status must be true or false'},
-      {type: 'required', message: 'Status is required'}
+      {type: 'pattern', message: 'Status must be true or false!'},
+      {type: 'required', message: 'Status is required!'}
     ],
 
     'body': [
-      {type: 'maxlength', message: 'Body cannot be more than 50 characters long.'},
-      {type: 'minlength', message: 'Body must be 4 or more characters.'}
+      {type: 'maxlength', message: 'Body cannot be more than 50 characters long!'},
+      {type: 'minlength', message: 'Body must be 4 or more characters!'}
     ]
   };
 

@@ -39,9 +39,15 @@ export class TodoListService {
 
     // Filter by age
     if (searchStatus != null) {
-      filteredTodos = filteredTodos.filter(todo => {
-        return !searchStatus || todo.status == searchStatus;
-      });
+      if (searchStatus == true) {
+        filteredTodos = filteredTodos.filter(todo => {
+          return !searchStatus || (todo.status == Boolean(searchStatus));
+        })
+      } else {
+        filteredTodos = filteredTodos.filter(todo => {
+          return !searchStatus || (todo.status != Boolean(searchStatus));
+        })
+      }
     }
 
     return filteredTodos;

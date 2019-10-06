@@ -21,6 +21,7 @@ export class TodoListComponent implements OnInit {
   public todoOwner: string;
   public todoStatus: boolean;
   public todoCategory: string;
+  public todoBody: string;
 
   // The ID of the
   private highlightedID: string = '';
@@ -68,12 +69,24 @@ export class TodoListComponent implements OnInit {
     this.updateFilter();
   }
 
+  public updateCategory(newCategory: string): void {
+    this.todoCategory = newCategory;
+    this.updateFilter();
+}
+
+public updatebody(newBody: string): void {
+    this.todoBody = newBody;
+  this.updateFilter();
+}
+
   public updateFilter() {
     this.filteredTodos =
       this.todoListService.filterTodos(
         this.todos,
         this.todoOwner,
-        this.todoStatus
+        this.todoStatus,
+        this.todoCategory,
+        this.todoBody
       );
   }
 
@@ -101,7 +114,7 @@ export class TodoListComponent implements OnInit {
   }
 
   loadService(): void {
-    this.todoListService.getTodos(this.todoCategory).subscribe(
+    this.todoListService.getTodos(this.todoOwner).subscribe(
       todos => {
         this.todos = todos;
         this.filteredTodos = this.todos;

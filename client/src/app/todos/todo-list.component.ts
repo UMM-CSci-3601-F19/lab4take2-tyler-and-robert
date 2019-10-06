@@ -64,8 +64,17 @@ export class TodoListComponent implements OnInit {
     this.updateFilter();
   }
 
-  public updateStatus(newStatus: boolean): void {
-    this.todoStatus = newStatus;
+  public updateStatus(newStatus: string): void {
+    newStatus = newStatus.toLowerCase();
+    if (newStatus == "complete" || newStatus == "true") {
+      this.todoStatus = true;
+    }
+    if (newStatus == "incomplete" || newStatus == "false") {
+      this.todoStatus = false;
+    }
+    if (newStatus == "") {
+      this.todoStatus = null;
+    }
     this.updateFilter();
   }
 
@@ -74,9 +83,9 @@ export class TodoListComponent implements OnInit {
     this.updateFilter();
 }
 
-public updatebody(newBody: string): void {
+  public updateBody(newBody: string): void {
     this.todoBody = newBody;
-  this.updateFilter();
+    this.updateFilter();
 }
 
   public updateFilter() {

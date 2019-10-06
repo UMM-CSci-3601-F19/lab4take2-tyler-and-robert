@@ -16,7 +16,6 @@ export class TodoListService {
   }
 
   getTodos(todoCategory?: string): Observable<Todo[]> {
-    this.filterByCategory(todoCategory);
     return this.http.get<Todo[]>(this.todoUrl);
   }
 
@@ -37,17 +36,24 @@ export class TodoListService {
       });
     }
 
-    // Filter by age
     if (searchStatus != null) {
-      if (searchStatus == true) {
-        filteredTodos = filteredTodos.filter(todo => {
-          return !searchStatus || (todo.status == Boolean(searchStatus));
-        })
-      } else {
-        filteredTodos = filteredTodos.filter(todo => {
-          return !searchStatus || (todo.status != Boolean(searchStatus));
-        })
-      }
+      filteredTodos = filteredTodos.filter((todo: Todo) => {
+        return todo.status === Boolean(searchStatus);
+      });
+    }
+
+    if (searchBody != null) {
+      searchBody = searchBody.toLowerCase();
+      filteredTodos = filteredTodos.filter(todo => {
+        return !searchBody || todo.body.toLowerCase().indexOf(searchBody) !== -1;
+      });
+    }
+
+    if (searchCategory != null) {
+      searchCategory = searchCategory.toLowerCase();
+      filteredTodos = filteredTodos.filter(todo => {
+        return !searchCategory || todo.category.toLowerCase().indexOf(searchCategory) !== -1;
+      });
     }
 
     return filteredTodos;
@@ -63,31 +69,6 @@ export class TodoListService {
   }
   */
 
-  filterByCategory(todoCategory?: string): void {
-    if (!(todoCategory == null || todoCategory === '')) {
-      if (this.parameterPresent('category=')) {
-        // there was a previous search by category that we need to clear
-        this.removeParameter('category=');
-      }
-      if (this.todoUrl.indexOf('?') !== -1) {
-        // there was already some information passed in this url
-        this.todoUrl += 'category=' + todoCategory + '&';
-      } else {
-        // this was the first bit of information to pass in the url
-        this.todoUrl += '?category=' + todoCategory + '&';
-      }
-    } else {
-      // there was nothing in the box to put onto the URL... reset
-      if (this.parameterPresent('category=')) {
-        let start = this.todoUrl.indexOf('category=');
-        const end = this.todoUrl.indexOf('&', start);
-        if (this.todoUrl.substring(start - 1, start) === '?') {
-          start = start - 1;
-        }
-        this.todoUrl = this.todoUrl.substring(0, start) + this.todoUrl.substring(end + 1);
-      }
-    }
-  }
 
   private parameterPresent(searchParam: string) {
     return this.todoUrl.indexOf(searchParam) !== -1;

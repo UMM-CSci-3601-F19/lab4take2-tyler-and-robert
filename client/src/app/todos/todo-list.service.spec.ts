@@ -141,7 +141,7 @@ describe('Todo list service: ', () => {
 
   it('todo list filters by owner and status', () => {
     expect(testTodos.length).toBe(3);
-    let todoStatus = false;
+    let todoStatus = true;
     let todoOwner = 'e';
     expect(todoListService.filterTodos(testTodos, todoOwner, todoStatus, null, null).length).toBe(1);
   });

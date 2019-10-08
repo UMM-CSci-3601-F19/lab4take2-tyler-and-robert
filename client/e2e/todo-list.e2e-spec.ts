@@ -37,31 +37,28 @@ describe('Todo list', () => {
 
   it('should type something in filter owner box and check that it returned correct element', () => {
     page.navigateTo();
-    page.typeAOwner('t');
-    expect(page.getUniqueTodo('kittypage@surelogic.com')).toEqual('Kitty Page');
+    page.typeAOwner('b');
+    expect(page.getUniqueTodo('Deserunt velit reprehenderit deserunt sunt excepteur sit eu eiusmod in voluptate aute minim mollit. Esse aliqua esse officia do proident non consequat non mollit.')).toEqual('Barry');
     page.backspace();
-    page.typeAOwner('lynn');
-    expect(page.getUniqueTodo('lynnferguson@niquent.com')).toEqual('Lynn Ferguson');
+    page.typeAOwner('roberta');
+    expect(page.getUniqueTodo('Pariatur ea et incididunt tempor eu voluptate laborum irure cupidatat adipisicing. Consequat occaecat consectetur qui culpa dolor.')).toEqual('Roberta');
   });
 
   it('should click on the status 27 times and return 3 elements then ', () => {
     page.navigateTo();
-    page.getTodoByStatus();
-    for (let i = 0; i < 27; i++) {
-      page.selectUpKey();
-    }
+    page.typeAStatus('true');
 
-    expect(page.getUniqueTodo('stokesclayton@momentia.com')).toEqual('Stokes Clayton');
+    expect(page.getUniqueTodo('Nostrud ullamco labore exercitation magna. Excepteur aute aliqua veniam veniam nisi eu occaecat ea magna do.')).toEqual('Blanche');
 
-    expect(page.getUniqueTodo('merrillparker@escenta.com')).toEqual('Merrill Parker');
+    expect(page.getUniqueTodo('Nisi sit non non sunt veniam pariatur. Elit reprehenderit aliqua consectetur est dolor officia et adipisicing elit officia nisi elit enim nisi.')).toEqual('Barry');
   });
 
   it('Should open the expansion panel and get the category', () => {
     page.navigateTo();
-    page.getCategory('DATA');
+    page.getCategory('video games');
     browser.actions().sendKeys(Key.ENTER).perform();
 
-    expect(page.getUniqueTodo('valerieerickson@datagene.com')).toEqual('Valerie Erickson');
+    expect(page.getUniqueTodo('Pariatur ea et incididunt tempor eu voluptate laborum irure cupidatat adipisicing. Consequat occaecat consectetur qui culpa dolor.')).toEqual('Roberta');
 
     // This is just to show that the panels can be opened
     browser.actions().sendKeys(Key.TAB).perform();
@@ -70,42 +67,22 @@ describe('Todo list', () => {
 
   it('Should allow us to filter todos based on category', () => {
     page.navigateTo();
-    page.getCategory('o');
+    page.getCategory('groceries');
     page.getTodos().then((todos) => {
-      expect(todos.length).toBe(4);
-    });
-    expect(page.getUniqueTodo('conniestewart@ohmnet.com')).toEqual('Connie Stewart');
-    expect(page.getUniqueTodo('stokesclayton@momentia.com')).toEqual('Stokes Clayton');
-    expect(page.getUniqueTodo('kittypage@surelogic.com')).toEqual('Kitty Page');
-    expect(page.getUniqueTodo('margueritenorton@recognia.com')).toEqual('Marguerite Norton');
-  });
-
-  it('Should allow us to clear a search for category and then still successfully search again', () => {
-    page.navigateTo();
-    page.getCategory('m');
-    page.getTodos().then((todos) => {
-      expect(todos.length).toBe(2);
-    });
-    page.click('categoryClearSearch');
-    page.getTodos().then((todos) => {
-      expect(todos.length).toBe(10);
-    });
-    page.getCategory('ne');
-    page.getTodos().then((todos) => {
-      expect(todos.length).toBe(3);
+      expect(todos.length).toBe(76);
     });
   });
 
   it('Should allow us to search for category, update that search string, and then still successfully search', () => {
     page.navigateTo();
-    page.getCategory('o');
+    page.getCategory('b');
     page.getTodos().then((todos) => {
-      expect(todos.length).toBe(4);
+      expect(todos.length).toBe(94);
     });
-    page.field('todoCategory').sendKeys('h');
+    page.field('todoCategory').sendKeys('a');
     page.click('submit');
     page.getTodos().then((todos) => {
-      expect(todos.length).toBe(1);
+      expect(todos.length).toBe(51);
     });
   });
 
@@ -135,12 +112,12 @@ describe('Todo list', () => {
     it('Should actually add the todo with the information we put in the fields', () => {
       page.navigateTo();
       page.click('addNewTodo');
-      page.field('ownerField').sendKeys('Tracy Kim');
+      page.field('ownerField').sendKeys('Morris');
       // Need to clear the status field because the default value is -1.
       page.field('statusField').clear();
-      page.field('statusField').sendKeys('26');
-      page.field('categoryField').sendKeys('Awesome Startup, LLC');
-      page.field('bodyField').sendKeys('tracy@awesome.com');
+      page.field('statusField').sendKeys('false');
+      page.field('categoryField').sendKeys('school');
+      page.field('bodyField').sendKeys('University of Minnesota Morris');
       expect(page.button('confirmAddTodoButton').isEnabled()).toBe(true);
       page.click('confirmAddTodoButton');
 
@@ -151,10 +128,10 @@ describe('Todo list', () => {
        * and then for the client to display this new todo.
        * http://www.protractortest.org/#/api?view=ProtractorExpectedConditions
        */
-      const tracy_element = element(by.id('tracy@awesome.com'));
-      browser.wait(protractor.ExpectedConditions.presenceOf(tracy_element), 10000);
+      const morris_element = element(by.id('University of Minnesota Morris'));
+      browser.wait(protractor.ExpectedConditions.presenceOf(morris_element), 10000);
 
-      expect(page.getUniqueTodo('tracy@awesome.com')).toMatch('Tracy Kim.*'); // toEqual('Tracy Kim');
+      expect(page.getUniqueTodo('University of Minnesota Morris')).toMatch('Morris.*'); // toEqual('Tracy Kim');
     });
 
     describe('Add Todo (Validation)', () => {
@@ -165,25 +142,15 @@ describe('Todo list', () => {
 
       it('Should allow us to put information into the fields of the add todo dialog', () => {
         expect(page.field('ownerField').isPresent()).toBeTruthy('There should be a owner field');
-        page.field('ownerField').sendKeys('Dana Jones');
+        page.field('ownerField').sendKeys('St. Thomas');
         expect(element(by.id('statusField')).isPresent()).toBeTruthy('There should be an status field');
         // Need to clear this field because the default value is -1.
         page.field('statusField').clear();
-        page.field('statusField').sendKeys('24');
+        page.field('statusField').sendKeys('false');
         expect(page.field('categoryField').isPresent()).toBeTruthy('There should be a category field');
-        page.field('categoryField').sendKeys('Awesome Startup, LLC');
+        page.field('categoryField').sendKeys('school');
         expect(page.field('bodyField').isPresent()).toBeTruthy('There should be an body field');
-        page.field('bodyField').sendKeys('dana@awesome.com');
-      });
-
-      it('Should show the validation error message about status being too small if the status is less than 15', () => {
-        expect(element(by.id('statusField')).isPresent()).toBeTruthy('There should be an status field');
-        page.field('statusField').clear();
-        page.field('statusField').sendKeys('2');
-        expect(page.button('confirmAddTodoButton').isEnabled()).toBe(false);
-        //clicking somewhere else will make the error appear
-        page.field('ownerField').click();
-        expect(page.getTextFromField('status-error')).toBe('Status must be at least 15');
+        page.field('bodyField').sendKeys('Another school.');
       });
 
       it('Should show the validation error message about status being required', () => {
@@ -225,15 +192,12 @@ describe('Todo list', () => {
         expect(page.getTextFromField('owner-error')).toBe('Owner has already been taken');
       });
 
-      it('Should show the validation error message about body format', () => {
+      it('Should allow everything to be added', () => {
         expect(element(by.id('bodyField')).isPresent()).toBeTruthy('There should be an body field');
         page.field('ownerField').sendKeys('Donald Jones');
         page.field('statusField').sendKeys('30');
         page.field('bodyField').sendKeys('donjones.com');
-        expect(page.button('confirmAddTodoButton').isEnabled()).toBe(false);
-        //clicking somewhere else will make the error appear
-        page.field('ownerField').click();
-        expect(page.getTextFromField('body-error')).toBe('Body must be formatted properly');
+        expect(page.button('confirmAddTodoButton').isEnabled()).toBe(true);
       });
     });
   });

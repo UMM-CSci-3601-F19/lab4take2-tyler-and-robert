@@ -48,10 +48,10 @@ export class TodoPage {
     this.click('submit');
   }
 
-  getTodoByStatus() {
-    const input = element(by.id('todoOwner'));
+  typeAStatus(status: string) {
+    const input = element(by.id('todoStatus'));
     input.click();
-    input.sendKeys(Key.TAB);
+    input.sendKeys(status);
   }
 
   getUniqueTodo(body: string) {
